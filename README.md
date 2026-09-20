@@ -1,2 +1,13 @@
 # Student-Course-List-ADT
-Configure courses based on semester/priority; add, remove, find, retrieve, replace, and display courses, calculate total credits.
+Team #7 is now called Syntax Club
+
+Team Lead:
+Conner Cunningham
+
+
+Team Members
+List the names of all team members.
+Conner Cunningham
+Shahsar Shamim
+Nayrooz Abazaid
+Kimberly Guerrero
