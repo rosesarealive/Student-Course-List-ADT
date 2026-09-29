@@ -50,7 +50,7 @@ StudentCourseList::StudentCourseList(const StudentCourseList& other)
         courses[i] = other.courses[i];
 }
 
-//replaces this list with a deep copy of another list
+/* replaces this list with a deep copy of another list <<<<< COPY SWAP REPLACE PLS
 StudentCourseList& StudentCourseList::operator=(const StudentCourseList& other)
 {
     if (this != &other) {
@@ -61,6 +61,7 @@ StudentCourseList& StudentCourseList::operator=(const StudentCourseList& other)
     }
     return *this;
 }
+*/
 
 //transfers ownership of another list's array
 StudentCourseList::StudentCourseList(StudentCourseList&& other)
