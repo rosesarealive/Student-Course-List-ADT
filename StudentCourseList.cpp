@@ -45,20 +45,27 @@ StudentCourseList::StudentCourseList(const StudentCourseList& other)
     for (int i = 0; i < listSize; ++i)
         courses[i] = other.courses[i];
 }
-
-/* replaces this list with a deep copy of another list <<<<< COPY SWAP REPLACE PLS
+// Replaces this list with a deep copy of another list.
 StudentCourseList& StudentCourseList::operator=(const StudentCourseList& other)
 {
-    if (this != &other) {
-        StudentCourseList copy(other);
-        std::swap(courses, copy.courses);
-        std::swap(listSize, copy.listSize);
-        std::swap(capacity, copy.capacity);
+    if (this != &other)
+    {
+        Course* newCourses =
+            other.capacity > 0 ? new Course[other.capacity] : nullptr;
+
+        for (int i = 0; i < other.listSize; i++)
+        {
+            newCourses[i] = other.courses[i];
+        }
+
+        delete[] courses;
+        courses = newCourses;
+        listSize = other.listSize;
+        capacity = other.capacity;
     }
+
     return *this;
 }
-*/
-
 //transfers ownership of another list's array
 StudentCourseList::StudentCourseList(StudentCourseList&& other)
     : courses(other.courses), listSize(other.listSize), capacity(other.capacity)
