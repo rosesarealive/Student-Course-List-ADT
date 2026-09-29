@@ -15,8 +15,6 @@
 #include "StudentCourseList.h"
 
 #include <iostream>
-#include <limits>
-#include <memory>
 #include <stdexcept>
 
 //creates an empty course list
@@ -30,7 +28,6 @@ StudentCourseList::StudentCourseList(int initialCapacity)
 
     courses = new Course[capacity];
 }
-
 
 //Shahsar - Big Five and course-specific methods
 
@@ -128,24 +125,26 @@ int StudentCourseList::calculateTotalCredits() const
 // Doubles capacity and preserves the existing courses.
 void StudentCourseList::resize()
 {
-    if (capacity > std::numeric_limits<int>::max() / 2)
-    {
-        throw std::length_error("Course list is too large.");
-    }
+   int newCapacity;
 
-    int newCapacity = (capacity == 0) ? 1 : capacity * 2;
+   if (capacity == 0)
+   {
+       newCapacity = 1;
+   }
+   else
+   {
+       newCapacity = capacity * 2;
+   }
+   Course* newCourses = new Course[newCapacity];
 
-    // Automatically frees the new array if copying throws.
-    std::unique_ptr<Course[]> newCourses(new Course[newCapacity]);
+   for (int i = 0; i < listSize; i++)
+   {
+       newCourses[i] = courses[i];
+   }
 
-    for (int i = 0; i < listSize; i++)
-    {
-        newCourses[i] = courses[i];
-    }
-
-    delete[] courses;
-    courses = newCourses.release();
-    capacity = newCapacity;
+   delete[] courses;
+   courses = newCourses;
+   capacity = newCapacity;
 }
 
 // Checks indexes used by remove(), get(), and set().
