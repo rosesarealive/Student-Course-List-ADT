@@ -18,7 +18,6 @@
 #include <limits>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 
 //creates an empty course list
 StudentCourseList::StudentCourseList(int initialCapacity)
