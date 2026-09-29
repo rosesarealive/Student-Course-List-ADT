@@ -12,4 +12,22 @@
  Resources/AI Tools Used: none
 */
 
+#include "StudentCourseList.h"
 
+#include <iostream>
+#include <string>
+#include <utility>
+
+using namespace std;
+
+//prints whether a test passed or failed
+void printTest(const string& testName, bool passed)
+{
+    cout << testName << ": "
+         << (passed ? "PASS" : "FAIL") << '\n';
+}
+
+int main()
+{
+ 
+}
