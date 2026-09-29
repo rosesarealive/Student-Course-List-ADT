@@ -3,6 +3,15 @@
 #include <iostream>
 #include <utility>
 
+StudentCourseList::StudentCourseList(int initialCapacity)
+    : courses(nullptr), listSize(0), capacity(initialCapacity)
+{
+    if (capacity <= 0)
+        capacity = 10;
+
+    courses = new Course[capacity];
+}
+
 StudentCourseList::~StudentCourseList()
 {
     delete[] courses;
