@@ -23,8 +23,18 @@ using namespace std;
 //prints whether a test passed or failed
 void printTest(const string& testName, bool passed)
 {
-    cout << testName << ": "
-         << (passed ? "PASS" : "FAIL") << '\n';
+    cout << testName << ": ";
+
+    if (passed)
+    {
+        cout << "PASS";
+    }
+    else
+    {
+        cout << "FAIL";
+    }
+
+    cout << '\n';
 }
 
 int main()
@@ -37,7 +47,7 @@ int main()
                       "Professor Chen", "B", "Spring 2026", "CMPR 120"};
 
     Course cmpr131 = {"Data Structures", "CMPR 131", 4,
-                      "Professor Smith", "A", "Fall 2026", "CMPR 121"};
+                      "Professor Alweheiby", "A", "Fall 2026", "CMPR 121"};
 
     Course math180 = {"Calculus I", "MATH 180", 4,
                       "Professor Davis", "B", "Spring 2026", "MATH 170"};
@@ -74,7 +84,13 @@ int main()
     printTest("Insert at end",
               courseList.get(courseList.size() - 1).courseID == "MATH 185");
 
-    printTest("Resize preserves all courses", courseList.size() == 5);
+    printTest("Resize preserves all courses",
+          courseList.size() == 5 &&
+          courseList.get(0).courseID == "CMPR 131" &&
+          courseList.get(1).courseID == "CMPR 120" &&
+          courseList.get(2).courseID == "MATH 180" &&
+          courseList.get(3).courseID == "CMPR 121" &&
+          courseList.get(4).courseID == "MATH 185");
 
     cout << "\n=== GET, SET, AND COURSE-SPECIFIC TESTS ===\n";
 
@@ -95,4 +111,77 @@ int main()
     courseList.displayCourses();
 
     cout << "\n=== REMOVAL TESTS ===\n";
+}
+
+//use a copy so the original list remains available for later tests
+    StudentCourseList removalList(courseList);
+
+    removalList.remove(0);
+    printTest("Remove from front",
+              removalList.size() == 4 &&
+              removalList.get(0).courseID == "CMPR 120");
+
+    removalList.remove(2);
+    printTest("Remove from middle",
+              removalList.size() == 3 &&
+              removalList.findCourse("CMPR 121") == -1);
+
+    removalList.remove(removalList.size() - 1);
+    printTest("Remove from end",
+              removalList.size() == 2 &&
+              removalList.findCourse("MATH 185") == -1);
+
+    removalList.clear();
+    printTest("clear() sets size to 0", removalList.size() == 0);
+    printTest("List is empty after clear()", removalList.isEmpty());
+
+    cout << "\n=== COPY TESTS ===\n";
+
+    StudentCourseList copiedList(courseList);
+
+    Course changedCourse = courseList.get(0);
+    changedCourse.grade = "F";
+    courseList.set(0, changedCourse);
+
+    printTest("Copy constructor copies ALL courses",
+              copiedList.size() == 5);
+    printTest("Copy constructor creates a deep copy",
+              copiedList.get(0).grade == "A" &&
+              courseList.get(0).grade == "F");
+
+    StudentCourseList assignedList;
+    assignedList = courseList;
+
+    changedCourse = courseList.get(1);
+    changedCourse.grade = "C";
+    courseList.set(1, changedCourse);
+
+    printTest("Copy assignment copies all courses",
+              assignedList.size() == 5);
+    printTest("Copy assignment creates a deep copy",
+              assignedList.get(1).grade == "A" &&
+              courseList.get(1).grade == "C");
+
+    cout << "\n=== MOVE TESTS ===\n";
+
+    StudentCourseList movedList(move(copiedList));
+
+    printTest("Move constructor transfers the courses",
+              movedList.size() == 5 &&
+              movedList.get(0).courseID == "CMPR 131");
+    printTest("Move constructor empties the source",
+              copiedList.size() == 0 && copiedList.isEmpty());
+
+    StudentCourseList moveAssignedList;
+    moveAssignedList = move(assignedList);
+
+    printTest("Move assignment transfers the courses",
+              moveAssignedList.size() == 5 &&
+              moveAssignedList.get(0).courseID == "CMPR 131");
+    printTest("Move assignment empties the source",
+              assignedList.size() == 0 && assignedList.isEmpty());
+
+    cout << "\n=== TESTING COMPLETE ===\n";
+
+    return 0;
 }
