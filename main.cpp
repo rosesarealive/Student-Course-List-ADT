@@ -111,7 +111,6 @@ int main()
     courseList.displayCourses();
 
     cout << "\n=== REMOVAL TESTS ===\n";
-}
 
 //use a copy so the original list remains available for later tests
     StudentCourseList removalList(courseList);
@@ -164,7 +163,7 @@ int main()
 
     cout << "\n=== MOVE TESTS ===\n";
 
-    StudentCourseList movedList(move(copiedList));
+    StudentCourseList movedList(std::move(copiedList));
 
     printTest("Move constructor transfers the courses",
               movedList.size() == 5 &&
@@ -173,7 +172,7 @@ int main()
               copiedList.size() == 0 && copiedList.isEmpty());
 
     StudentCourseList moveAssignedList;
-    moveAssignedList = move(assignedList);
+    moveAssignedList = std::move(assignedList);
 
     printTest("Move assignment transfers the courses",
               moveAssignedList.size() == 5 &&
