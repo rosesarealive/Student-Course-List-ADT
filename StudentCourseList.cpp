@@ -111,9 +111,9 @@ void StudentCourseList::displayCourses() const
         std::cout << i << ". " << c.courseID << " - " << c.courseName
                   << " (" << c.units << " units)\n"
                   << "   Instructor: " << c.instructor << '\n'
-                  << ", Grade: " << c.grade << '\n'
-                  << ", Semester: " << c.semester << '\n'
-                  << ", Prerequisite: " << c.prerequisite << "\n\n";
+                  << "   Grade: " << c.grade << '\n'
+                  << "   Semester: " << c.semester << '\n'
+                  << "   Prerequisite: " << c.prerequisite << "\n\n";
 }
 
 //calculates the total number of course units
