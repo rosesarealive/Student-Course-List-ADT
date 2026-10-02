@@ -67,7 +67,7 @@ StudentCourseList& StudentCourseList::operator=(const StudentCourseList& other)
     return *this;
 }
 //transfers ownership of another list's array
-StudentCourseList::StudentCourseList(StudentCourseList&& other) noexcept
+StudentCourseList::StudentCourseList(StudentCourseList&& other)
     : courses(other.courses), listSize(other.listSize), capacity(other.capacity)
 {
     other.courses = nullptr;
@@ -76,7 +76,7 @@ StudentCourseList::StudentCourseList(StudentCourseList&& other) noexcept
 }
 
 //replaces this list by taking ownership of another list's array
-StudentCourseList& StudentCourseList::operator=(StudentCourseList&& other) noexcept
+StudentCourseList& StudentCourseList::operator=(StudentCourseList&& other)
 {
     if (this != &other) {
         delete[] courses;
