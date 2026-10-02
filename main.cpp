@@ -39,6 +39,10 @@ void printTest(const string& testName, bool passed)
 
 int main()
 {
+ cout << "======   Student Course List ADT  ======\n";
+ cout << "======      Group Project #1      ======\n";
+ cout << "====== by: Conner, Shahsar, & Kim ======\n\n";
+ 
  //sample courses used in tests
     Course cmpr120 = {"Introduction to Programming", "CMPR 120", 3,
                       "Professor Lopez", "A", "Fall 2025", "None"};
